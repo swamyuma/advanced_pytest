@@ -11,6 +11,7 @@ py.test -s -q test_sample.py --slide_number "Slide2"
 Use `pytest.mark.parametrize` to test website title on `Firefox` and `Chrome` browsers
 ### Reference
 https://www.youtube.com/watch?v=LdVJj65ikRY
+
 https://blogs.gnome.org/danni/2012/11/15/combining-py-test-and-selenium-to-test-webapps/
 ### Command
 ```sh
