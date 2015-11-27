@@ -1,7 +1,7 @@
 import pytest
 from selenium.webdriver import Firefox, Chrome
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def webdriver(request):
     driver = Firefox()
     request.addfinalizer(driver.quit)
