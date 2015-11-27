@@ -3,7 +3,7 @@ from selenium import webdriver
 
 browsers = {
                 'firefox': webdriver.Firefox(),
-                'chrome': webdriver.Chrome('/Users/unagaswamy/Downloads/chromedriver'),
+                'chrome': webdriver.Chrome('/path/to/chromedriver'),
           }
 
 @pytest.fixture(scope='session', params=browsers.keys())
