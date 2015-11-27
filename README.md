@@ -1,4 +1,4 @@
-# Learning advanced pytest
+# Advanced pytest
 ## Passing commandline arguments to pytest
 Pass input arguments from commandline to test file
 ```sh
