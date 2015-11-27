@@ -1,11 +1,12 @@
 import pytest
 import mock
 from mock import Mock
-from forecaster import Forecaster, WeatherService
+from forecaster import Forecaster
+from weather_service import WeatherService
 
 @pytest.fixture
 def mock_ws():
-    return Mock(spce=WeatherService)
+    return Mock(spec=WeatherService)
 
 @pytest.mark.parametrize(
                 "reading, expected_forecast",
@@ -14,8 +15,10 @@ def mock_ws():
                     ('falling', 'Looks clear'),
                 ]
 )
-def test_forecast(reading, expected_forecast, mock_ws):
-    forecaster = Forecaster(mock_ws)
+def test_forecast(reading, expected_forecast, monkeypatch, mock_ws):
+    WS = Mock(return_value=mock_ws)
+    monkeypatch.setattr('forecaster.WeatherService', WS)
+    forecaster = Forecaster()
     mock_ws.barometer.return_value = reading
     assert forecaster.forecast() == expected_forecast
 
