@@ -1,6 +1,7 @@
 # Advanced pytest
 ## Passing commandline arguments to pytest
 Pass input arguments from commandline to test file
+### Command
 ```sh
 py.test -s -q test_sample.py --slide_number "Slide1"
 
@@ -10,6 +11,7 @@ py.test -s -q test_sample.py --slide_number "Slide2"
 Use `pytest.mark.parametrize` to test website title on `Firefox` and `Chrome` browsers
 ### Reference
 https://www.youtube.com/watch?v=LdVJj65ikRY
+### Command
 ```sh
 py.test -s -q test_website_title.py
 ```
