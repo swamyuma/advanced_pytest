@@ -1,11 +1,16 @@
 import pytest
-from selenium.webdriver import Firefox, Chrome
+from selenium import webdriver
 
-@pytest.fixture(scope='session')
-def webdriver(request):
-    driver = Firefox()
-    request.addfinalizer(driver.quit)
-    return driver
+browsers = {
+                'firefox': webdriver.Firefox(),
+                'chrome': webdriver.Chrome('/Users/unagaswamy/Downloads/chromedriver'),
+          }
+
+@pytest.fixture(scope='session', params=browsers.keys())
+def driver(request):
+    browser = browsers[request.param]
+    request.addfinalizer(lambda *args: browser.quit())
+    return browser
 
 @pytest.mark.parametrize("site, expected_title",
                 [
@@ -13,7 +18,6 @@ def webdriver(request):
                     ("https://pytest.org/latest", "pytest")
                 ]
           )
-def test_site_in_website_title(site, expected_title, webdriver):
-    webdriver.get(site)
-    assert expected_title in webdriver.title
-#    assert 'pytest' in webdriver.title
+def test_site_in_website_title(site, expected_title, driver):
+    driver.get(site)
+    assert expected_title in driver.title
