@@ -1,12 +1,8 @@
-import random
+from weather_service import WeatherService
 
-class WeatherService(object):
-    def barometer(self):
-        return random.choice(['rising', 'falling'])    
-        
 class Forecaster(object):
-    def __init__(self, weather_service):
-        self.weather_service = weather_service
+    def __init__(self):
+        self.weather_service = WeatherService()
 
     def forecast(self):
         reading = self.weather_service.barometer()
