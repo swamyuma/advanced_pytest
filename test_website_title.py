@@ -7,10 +7,13 @@ def webdriver(request):
     request.addfinalizer(driver.quit)
     return driver
 
-def test_nix_in_website_title(webdriver):
-    webdriver.get('https://nixos.org/nix')
-    assert 'Nix' in webdriver.title
-
-def test_pytest_in_website_title(webdriver):
-    webdriver.get('https://pytest.org/latest')
-    assert 'pytest' in webdriver.title
+@pytest.mark.parametrize("site, expected_title",
+                [
+                    ("https://nixos.org/nix", "Nix"),
+                    ("https://pytest.org/latest", "pytest")
+                ]
+          )
+def test_site_in_website_title(site, expected_title, webdriver):
+    webdriver.get(site)
+    assert expected_title in webdriver.title
+#    assert 'pytest' in webdriver.title
