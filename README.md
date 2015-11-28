@@ -3,9 +3,9 @@
 Pass input arguments from commandline to test file
 ### Command
 ```sh
-py.test -s -q test_sample.py --slide_number "Slide1"
+py.test -s -q test_slide_number.py --slide_number "Slide1"
 
-py.test -s -q test_sample.py --slide_number "Slide2"
+py.test -s -q test_slide_number.py --slide_number "Slide2"
 ```
 ## Test parametrization
 Use `pytest.mark.parametrize` to test website title on `Firefox` and `Chrome` browsers
