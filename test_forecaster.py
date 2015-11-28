@@ -13,12 +13,12 @@ def mock_ws():
                 [
                     ('rising', 'Going to rain'),
                     ('falling', 'Looks clear'),
-                ]
+                ], ids=["rain", "clear"]
 )
 def test_forecast(reading, expected_forecast, monkeypatch, mock_ws):
     WS = Mock(return_value=mock_ws)
     monkeypatch.setattr('forecaster.WeatherService', WS)
     forecaster = Forecaster()
     mock_ws.barometer.return_value = reading
-    assert forecaster.forecast() == expected_forecast
+    assert 0
 
