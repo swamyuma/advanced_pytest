@@ -90,5 +90,5 @@ FAIL test_forecaster.py::test_forecast[clear]
 ============================================ 2 failed in 0.01 seconds =============================================
 ```
 ### Reference
-https://www.youtube.com/watch?v=RcN26hznmk4
-https://www.youtube.com/watch?v=AiThU6JQbE8
+* https://www.youtube.com/watch?v=RcN26hznmk4
+* https://www.youtube.com/watch?v=AiThU6JQbE8
