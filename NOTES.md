@@ -9,6 +9,48 @@ pytest implements the following standard test discovery:
 * test_*.py or *_test.py files, imported by their test package name.
 * Test prefixed test classes (without an __init__ method)
 * test_ prefixed test functions or methods are test items
+##Simple Data Structure Testing
+###Test Adding Strings
+```python
+def test_multiline_string():
+    assert "foo\nbar\nbaz" == "foo\nspan\nbaz"
+
+def concatenate_strings(string, number):
+    a = string * number + 'a' +  string * number
+    b = string * number + 'b' +  string * number
+    return a, b 
+ 
+def test_concatenate_strings():
+    a, b = concatenate_strings('1', 1000)
+    assert a == b
+```
+###Test Numbers
+```python
+def plusone(x):
+    return x + 1
+     
+def test_plusone():
+    assert plusone(3) == 5
+```
+###Test Dictionary and Tuples
+```python
+def test_dict_diffs():
+    dict_a = {'a':0, 'b':1, 'c':2, 'd':9}
+    dict_b = {'a':0, 'b':2, 'c':2}
+    assert dict_a == dict_b
+ 
+def test_tuples_diffs():
+    tuple_a = (('a',0), ('b',1), ('c',3), ('d',9))
+    tuple_b = (('a',0), ('b',2), ('c',3))
+    assert tuple_a == tuple_b
+```
+###Test Sets
+```python
+def test_set_diffs():
+    seta = set([1,2,3,4,5])
+    setb = set([0,1,2,3,4])
+    assert seta == setb
+```
 ##Assert Expected Exceptions
 Use context manager to test exceptions
 ```python
