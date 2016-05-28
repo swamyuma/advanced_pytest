@@ -23,9 +23,8 @@ def test_mytest():
 ```
 ##Combining Multiple Tests
 Once you start to have more than a few tests it often makes sense to group tests logically, in classes and modules. Let’s write a class containing two tests:
-
-# content of test_class.py
 ```python
+# content of test_class.py
 class TestClass:
     def test_one(self):
         x = "this"
@@ -192,4 +191,29 @@ and run it
 $ py.test -s -q --tb=no
 FFteardown smtp
 ```
+##Parametrizing a fixture
+Fixture functions can be parametrized in which case they will be called multiple times, each time executing the set of dependent tests, i. e. the tests that depend on this fixture. Test functions do usually not need to be aware of their re-running. Fixture parametrization helps to write exhaustive functional tests for components which themselves can be configured in multiple ways.
 
+Extending the previous example, we can flag the fixture to create two smtp fixture instances which will cause all tests using the fixture to run twice. The fixture function gets access to each parameter through the special request object:
+```python
+# content of conftest.py
+import pytest
+import smtplib
+
+@pytest.fixture(scope="module",
+                params=["smtp.gmail.com", "mail.python.org"])
+def smtp(request):
+    smtp = smtplib.SMTP(request.param)
+    def fin():
+        print ("finalizing %s" % smtp)
+        smtp.close()
+    request.addfinalizer(fin)
+    return smtp
+```
+The main change is the declaration of params with @pytest.fixture, a list of values for each of which the fixture function will execute and can access a value via request.param. No test function code needs to change. So let’s just do another run:
+```bash
+py.test -q test_module.py
+```
+We see that our two test functions each ran twice, against the different smtp instances. Note also, that with the mail.python.org connection the second test fails in test_ehlo because a different server string is expected than what arrived.
+
+pytest will build a string that is the test ID for each fixture value in a parametrized fixture, e.g. test_ehlo[smtp.gmail.com] and test_ehlo[mail.python.org] in the above examples. These IDs can be used with -k to select specific cases to run, and they will also identify the specific case when one is failing. Running pytest with --collect-only will show the generated IDs.
