@@ -16,7 +16,14 @@ def mock_ws():
                 ], ids=["rain", "clear"]
 )
 def test_forecast(reading, expected_forecast, monkeypatch, mock_ws):
-    WS = Mock(return_value=mock_ws)
+    '''
+    1. Assume that the forecaster module imports an external module weatherservice and 
+    then instantiates it in the constructor.
+    2. In this case you cannot inject a mock into forecaster's constructor.
+    3. Therefore, use a monkeypatching. Pytest will only patch a value for the duration
+    of the test and then remove it.
+    '''
+    WS = Mock(return_value=mock_ws) 
     monkeypatch.setattr('forecaster.WeatherService', WS)
     forecaster = Forecaster()
     mock_ws.barometer.return_value = reading
