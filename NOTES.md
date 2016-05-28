@@ -9,6 +9,7 @@ pytest implements the following standard test discovery:
 * test_*.py or *_test.py files, imported by their test package name.
 * Test prefixed test classes (without an __init__ method)
 * test_ prefixed test functions or methods are test items
+
 ##Simple Data Structure Testing
 ###Test Adding Strings
 ```python
