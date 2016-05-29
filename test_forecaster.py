@@ -28,5 +28,5 @@ def test_forecast(reading, expected_forecast, monkeypatch, mock_ws):
     forecaster = Forecaster()
     mock_ws.barometer.return_value = reading
     assert forecaster.forecast() == expected_forecast
-    #assert 0 (debug purposes)
+    #assert 0 (demo purposes)
 
