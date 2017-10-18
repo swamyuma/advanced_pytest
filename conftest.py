@@ -7,4 +7,7 @@ def pytest_addoption(parser):
 
 @pytest.fixture
 def slide_number(request):
+    """
+        Returns a slide_number provide as an input parameter.
+    """
     return request.config.getoption("--slide_number")
