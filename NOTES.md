@@ -139,6 +139,8 @@ This test will be run but no traceback will be reported when it fails. Instead t
 ## Beyond Simple Testing: fixtures
 Something that provides a fixed baseline
 * initialzation before tests are run
+    - creates data that can be used in tests
+    - test function can take fixtures as input arguments
 * avoids repetitive calls
 * leverages dependency injection
 ```python
@@ -149,8 +151,10 @@ def somevalue():
     return 42
 
 def test_somevalue(somevalue):
-    assert somevalue == 42
+    assert somevalue == 42, "Somevalue should equal 42"
 ```
+Here, `somevalue` fixture is assinged a value `42`.  The `test_somevalue` test function takes `somevalue` fixture as an input argument. Always add a comment to the assertion lines to indicate a constructive error message upon failure.
+
 ## Reuse the same fixture in same session or all modules
 ### Scoping fixture functions
 ```python
