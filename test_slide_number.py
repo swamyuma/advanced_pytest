@@ -1,4 +1,5 @@
 # content of test_sample.py
+# here, slide_number argument comes from conftest fixture.
 def test_answer(slide_number):
     if slide_number == "Slide1":
         print "from test_answer {sn}".format(sn=slide_number)
